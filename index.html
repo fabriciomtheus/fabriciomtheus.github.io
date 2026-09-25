@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fabricio Pereira // TI — Infraestrutura, Suporte & Sistemas</title>
+    <title>Fabrício Pereira // TI — Infraestrutura, Suporte & Sistemas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            /* Fundo escuro profundo preservado + Paleta Branca Moderna */
             --void-bg: #050608;
             --card-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.045) 0%, rgba(255, 255, 255, 0.015) 100%);
-            --card-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.07) 0%, rgba(255, 255, 255, 0.025) 100%);
+            --card-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.075) 0%, rgba(255, 255, 255, 0.025) 100%);
             --text-white: #ffffff;
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
@@ -21,7 +20,7 @@
             --accent: #60a5fa;
             --accent-soft: rgba(96, 165, 250, 0.12);
             --border-glass: rgba(255, 255, 255, 0.09);
-            --border-hover: rgba(255, 255, 255, 0.22);
+            --border-hover: rgba(255, 255, 255, 0.24);
             --divider: rgba(255, 255, 255, 0.07);
             --radius-lg: 16px;
             --radius-md: 12px;
@@ -49,7 +48,7 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* FUNDO ORBITAL PRESERVADO COM BRILHO SUTIL */
+        /* FUNDO ORBITAL PRESERVADO */
         .orbital-bg {
             position: fixed;
             top: 0;
@@ -69,34 +68,79 @@
             border: 1px solid rgba(255, 255, 255, 0.045);
         }
 
-        .ring-1 {
-            width: 900px;
-            height: 900px;
-            top: -350px;
-            right: -250px;
+        .ring-1 { width: 900px; height: 900px; top: -350px; right: -250px; }
+        .ring-2 { width: 1250px; height: 1250px; top: -520px; right: -420px; border-color: rgba(96, 165, 250, 0.04); }
+        .ring-3 { width: 780px; height: 780px; bottom: -280px; left: -260px; }
+
+        /* ANIMAÇÕES DE SCROLL REVEAL (SUGESTÃO DO COLEGA) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
         }
 
-        .ring-2 {
-            width: 1250px;
-            height: 1250px;
-            top: -520px;
-            right: -420px;
-            border-color: rgba(96, 165, 250, 0.04);
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .ring-3 {
-            width: 780px;
-            height: 780px;
-            bottom: -280px;
-            left: -260px;
+        .delay-1 { transition-delay: 0.08s; }
+        .delay-2 { transition-delay: 0.16s; }
+        .delay-3 { transition-delay: 0.24s; }
+
+        /* BOTÃO FLUTUANTE VOLTAR AO TOPO (SUGESTÃO DO COLEGA) */
+        .floating-top-btn {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 999;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-white);
+            background: rgba(12, 15, 22, 0.85);
+            backdrop-filter: blur(14px);
+            border: 1px solid var(--border-glass);
+            padding: 12px 18px;
+            border-radius: var(--radius-pill);
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(16px);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
         }
 
-        /* NAVBAR MODERNA */
+        .floating-top-btn.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .floating-top-btn:hover {
+            border-color: var(--border-hover);
+            background: rgba(25, 30, 42, 0.95);
+            transform: translateY(-3px);
+        }
+
+        .floating-top-btn .arrow-up {
+            color: var(--accent);
+            font-size: 14px;
+            line-height: 1;
+        }
+
+        /* NAVBAR */
         .navbar {
             position: sticky;
             top: 0;
             z-index: 100;
-            background-color: rgba(5, 6, 8, 0.8);
+            background-color: rgba(5, 6, 8, 0.82);
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--divider);
             padding: 16px 24px;
@@ -153,7 +197,7 @@
             color: var(--text-white);
         }
 
-        /* BOTÕES ELEGANTES */
+        /* BOTÕES */
         .btn {
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 13px;
@@ -193,7 +237,7 @@
             transform: translateY(-1px);
         }
 
-        /* ESTRUTURA DAS SEÇÕES */
+        /* SEÇÕES */
         .section-wrapper {
             position: relative;
             z-index: 1;
@@ -202,11 +246,10 @@
         }
 
         .container {
-            max-width: 940px;
+            max-width: 960px;
             margin: 0 auto;
         }
 
-        /* NOVO CABEÇALHO DE SEÇÃO MODERNO (SUBSTITUI O CÍRCULO 05/06) */
         .section-header {
             margin-bottom: 48px;
         }
@@ -289,7 +332,7 @@
 
         .hero-lead {
             color: var(--text-secondary);
-            max-width: 650px;
+            max-width: 670px;
             font-size: 15.5px;
             margin-bottom: 36px;
         }
@@ -301,7 +344,7 @@
             margin-bottom: 64px;
         }
 
-        /* BARRA DE MÉTRICAS EM CARDS MODERNOS (BENTO STYLE) */
+        /* BARRA DE MÉTRICAS COM CONTADOR ANIMADO */
         .metrics-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -325,7 +368,7 @@
         .metric-val {
             font-family: 'Space Grotesk', sans-serif;
             font-weight: 700;
-            font-size: 1.85rem;
+            font-size: 1.95rem;
             color: var(--text-white);
             line-height: 1.1;
             margin-bottom: 6px;
@@ -337,7 +380,7 @@
             line-height: 1.4;
         }
 
-        /* SEÇÃO 01: PERFIL & ESPECIFICAÇÕES */
+        /* SEÇÃO 01: PERFIL */
         .profile-layout {
             display: grid;
             grid-template-columns: 1.35fr 1fr;
@@ -391,7 +434,7 @@
             font-weight: 500;
         }
 
-        /* SEÇÃO 02: CRONOLOGIA OPERACIONAL */
+        /* SEÇÃO 02: EXPERIÊNCIA */
         .modern-timeline {
             position: relative;
             border-left: 1px solid var(--border-glass);
@@ -516,10 +559,10 @@
             color: var(--accent);
         }
 
-        /* SEÇÃO 03: PROJETOS (MODERNO & ARREDONDADO) */
+        /* SEÇÃO 03: PROJETOS (TODOS OS PROJETOS DO NOTEBOOK DEV 4RIBH) */
         .projects-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 24px;
         }
 
@@ -527,15 +570,22 @@
             background: var(--card-bg);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-lg);
-            padding: 32px;
+            padding: 30px;
             backdrop-filter: blur(12px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             transition: all 0.25s ease;
+        }
+
+        .modern-card.full-span {
+            grid-column: 1 / -1;
         }
 
         .modern-card:hover {
             background: var(--card-bg-hover);
             border-color: var(--border-hover);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
         }
 
         .project-top {
@@ -543,7 +593,7 @@
             justify-content: space-between;
             align-items: flex-start;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 14px;
             margin-bottom: 14px;
         }
 
@@ -559,31 +609,53 @@
 
         .card-heading {
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 1.45rem;
+            font-size: 1.35rem;
             font-weight: 700;
             color: var(--text-white);
+            line-height: 1.25;
         }
 
         .card-description {
             color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 14.2px;
+        }
+
+        .feature-bullets {
+            list-style: none;
             margin-bottom: 22px;
-            font-size: 14.5px;
+        }
+
+        .feature-bullets li {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 7px;
+            font-size: 13.5px;
+            color: var(--text-primary);
+        }
+
+        .feature-bullets li::before {
+            content: "•";
+            position: absolute;
+            left: 2px;
+            color: var(--accent);
+            font-weight: bold;
         }
 
         .flow-box {
             background: rgba(255, 255, 255, 0.025);
             border: 1px solid var(--border-glass);
             border-radius: var(--radius-md);
-            padding: 16px 20px;
-            margin-bottom: 22px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--text-primary);
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
         }
 
         .flow-arrow {
@@ -594,19 +666,20 @@
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
+            margin-top: auto;
         }
 
         .tech-pill {
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            padding: 5px 13px;
+            font-size: 10.5px;
+            padding: 5px 12px;
             border-radius: 8px;
             border: 1px solid var(--border-glass);
             color: var(--text-secondary);
             background: rgba(255, 255, 255, 0.02);
         }
 
-        /* SEÇÃO 04: DOMÍNIOS TÉCNICOS (CARDS MODERNOS) */
+        /* SEÇÃO 04: DOMÍNIOS TÉCNICOS */
         .triad-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -738,14 +811,15 @@
 
         @media (max-width: 820px) {
             .nav-links { display: none; }
-            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+            .metrics-grid, .projects-grid { grid-template-columns: 1fr; }
             .profile-layout, .triad-grid, .contact-card { grid-template-columns: 1fr; }
             .cred-item { grid-template-columns: 1fr; gap: 4px; }
             .cred-date { text-align: left; }
+            .floating-top-btn { bottom: 18px; right: 18px; padding: 10px 14px; }
         }
     </style>
 </head>
-<body>
+<body id="topo">
 
     
     <div class="orbital-bg">
@@ -755,9 +829,15 @@
     </div>
 
     
+    <a href="#topo" id="floatingTopBtn" class="floating-top-btn" aria-label="Voltar ao topo">
+        <span>Voltar ao topo</span>
+        <span class="arrow-up">↑</span>
+    </a>
+
+    
     <nav class="navbar">
         <div class="nav-container">
-            <a href="#" class="brand">FABRICIO PEREIRA <span>SYS.TI</span></a>
+            <a href="#topo" class="brand">FABRÍCIO PEREIRA <span>SYS.TI</span></a>
             <ul class="nav-links">
                 <li><a href="#arquitetura">Perfil</a></li>
                 <li><a href="#cronologia">Experiência</a></li>
@@ -772,38 +852,49 @@
     
     <section class="section-wrapper">
         <div class="container">
-            <div class="status-pill">
-                <span class="status-dot"></span>
-                <span>BELO HORIZONTE, MG · INFRAESTRUTURA, SUPORTE & SISTEMAS</span>
-            </div>
-            <h1 class="hero-name">Fabricio Matheus<br>Alves Pereira</h1>
-            <p class="hero-subtitle">Assistente de TI no <strong>4º Registro de Imóveis de BH</strong> · Experiência no <strong>TJMG</strong></p>
-            <p class="hero-lead">
-                Profissional de Tecnologia da Informação em constante evolução, combinando 9 anos de vivência em ambientes jurídicos e registrais com atuação prática em servidores Windows, redes, segurança da informação, bancos de dados e governança regulatória.
-            </p>
+            <div class="reveal">
+                <div class="status-pill">
+                    <span class="status-dot"></span>
+                    <span>BELO HORIZONTE, MG · INFRAESTRUTURA, SUPORTE & SOLUÇÕES INTERNAS</span>
+                </div>
+                <h1 class="hero-name">Fabrício Matheus<br>Alves Pereira</h1>
+                <p class="hero-subtitle">Assistente de TI no <strong>4º Registro de Imóveis de BH</strong> · Experiência no <strong>TJMG</strong></p>
+                <p class="hero-lead">
+                    Profissional de Tecnologia da Informação em constante evolução, combinando 9 anos de vivência em ambientes jurídicos e registrais com atuação prática em servidores Windows, redes, segurança da informação, bancos de dados e desenvolvimento de sistemas internos assistido por IA.
+                </p>
 
-            <div class="hero-actions">
-                <a href="#projetos" class="btn btn-white">Explorar Projetos ↓</a>
-                <a href="#cronologia" class="btn btn-glass">Trajetória Profissional</a>
-                <a href="https://wa.me/5531975789018" target="_blank" class="btn btn-glass">WhatsApp ↗</a>
+                <div class="hero-actions">
+                    <a href="#projetos" class="btn btn-white">Ver Sistemas Desenvolvidos ↓</a>
+                    <a href="#cronologia" class="btn btn-glass">Trajetória Profissional</a>
+                    <a href="https://wa.me/5531975789018" target="_blank" class="btn btn-glass">WhatsApp ↗</a>
+                </div>
             </div>
 
-            <div class="metrics-grid">
+            
+            <div class="metrics-grid reveal delay-1">
                 <div class="metric-card">
-                    <div class="metric-val">9+ anos</div>
+                    <div class="metric-val">
+                        <span class="count-up" data-target="9" data-suffix="+ anos">0</span>
+                    </div>
                     <div class="metric-label">Vivência em Ambientes Jurídicos e Cartorários</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-val">TJMG</div>
-                    <div class="metric-label">2 Anos de Atuação Presencial no Tribunal</div>
+                    <div class="metric-val">
+                        <span class="count-up" data-target="6" data-suffix=" sistemas">0</span>
+                    </div>
+                    <div class="metric-label">Módulos e Ferramentas Internas Implantadas no 4RIBH</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-val">CNJ 213</div>
+                    <div class="metric-val">
+                        <span class="count-up" data-target="213" data-prefix="CNJ ">0</span>
+                    </div>
                     <div class="metric-label">Conformidade Técnica, Segurança & LGPD</div>
                 </div>
                 <div class="metric-card">
-                    <div class="metric-val">ADS</div>
-                    <div class="metric-label">Graduação em Andamento (Centro Univ. Una)</div>
+                    <div class="metric-val">
+                        <span class="count-up" data-target="8" data-suffix=" certificações">0</span>
+                    </div>
+                    <div class="metric-label">Credenciais em TI, Segurança & Auditoria ISO</div>
                 </div>
             </div>
         </div>
@@ -812,13 +903,13 @@
     
     <section id="arquitetura" class="section-wrapper">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <div class="section-badge"><span class="num">01</span> // ARQUITETURA PROFISSIONAL</div>
                 <h2 class="section-title">Estabilidade técnica a serviço da rotina jurídica.</h2>
             </div>
 
             <div class="profile-layout">
-                <div class="profile-narrative">
+                <div class="profile-narrative reveal delay-1">
                     <p>
                         Minha caminhada profissional nasceu dentro do próprio <strong>Tribunal de Justiça de Minas Gerais (TJMG)</strong>, onde atuei presencialmente por dois anos. Esse contato inicial consolidou meu entendimento sobre o rigor dos prazos, o trâmite de documentos sensíveis e o funcionamento interno de secretarias e setores públicos.
                     </p>
@@ -826,30 +917,30 @@
                         No <strong>4º Registro de Imóveis de Belo Horizonte</strong>, construí uma trajetória sólida de 9 anos, realizando a transição do suporte operacional para a linha de frente da Tecnologia da Informação. Hoje, zelo pela disponibilidade contínua das estações, servidores, ativos de rede e sistemas internos de registro.
                     </p>
                     <p>
-                        Busco evoluir continuamente como profissional de TI: alio a capacidade prática de resolver incidentes de hardware e infraestrutura com o estudo de desenvolvimento de sistemas, consultas a bancos de dados e aplicação de recursos em Python para otimizar tarefas cotidianas.
+                        Além da sustentação de infraestrutura, utilizo programação assistida por IA (Python, Node.js, SQL e PowerShell) para transformar necessidades reais do cartório em sistemas internos completos — desde portais de chamados e inventário automático até totens de autoatendimento e painéis gerenciais.
                     </p>
                 </div>
 
-                <div class="glass-panel">
+                <div class="glass-panel reveal delay-2">
                     <div class="spec-item">
                         <div class="spec-key">DIRETRIZ PRINCIPAL</div>
                         <div class="spec-val">Suporte Técnico em TI, Sustentação de Infraestrutura e Atendimento ao Usuário</div>
                     </div>
                     <div class="spec-item">
                         <div class="spec-key">ECOSSISTEMA DE ATUAÇÃO</div>
-                        <div class="spec-val">Órgãos Judiciais (TJMG) e Serventias Extrajudiciais</div>
+                        <div class="spec-val">Órgãos Judiciais (TJMG) e Serventias Extrajudiciais (4º RI de BH)</div>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-key">STACK & FERRAMENTAS</div>
-                        <div class="spec-val">Windows Server · Redes · Rotinas de Backup · Microsoft 365 · SQL (Relatórios) · Noções de Python</div>
+                        <div class="spec-key">INFRAESTRUTURA & AMBIENTES</div>
+                        <div class="spec-val">Windows Server · Active Directory (LDAP / GPO) · Ubuntu Server · Redes & Backup · Microsoft 365</div>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-key">NORMATIVAS & SEGURANÇA</div>
-                        <div class="spec-val">Provimento 213/CNJ · LGPD · Certificados Digitais · ISO 37001 / 37301 / 19011</div>
+                        <div class="spec-key">DADOS & DESENVOLVIMENTO</div>
+                        <div class="spec-val">PostgreSQL · SQLite · Consultas SQL · Python (Flask / Streamlit / Tkinter) · Node.js · PowerShell</div>
                     </div>
                     <div class="spec-item">
-                        <div class="spec-key">IDIOMA TÉCNICO</div>
-                        <div class="spec-val">Inglês Intermediário (Leitura técnica fluente e comunicação em evolução)</div>
+                        <div class="spec-key">NORMATIVAS & IDIOMA</div>
+                        <div class="spec-val">Provimento 213/CNJ · LGPD · ISO 19011 · Inglês Intermediário (Leitura técnica fluente)</div>
                     </div>
                 </div>
             </div>
@@ -859,14 +950,14 @@
     
     <section id="cronologia" class="section-wrapper">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <div class="section-badge"><span class="num">02</span> // HISTÓRICO DE CAMPO</div>
                 <h2 class="section-title">Trajetória e evolução operacional.</h2>
             </div>
 
             <div class="modern-timeline">
                 
-                <div class="timeline-station">
+                <div class="timeline-station reveal">
                     <div class="station-dot"></div>
                     <div class="station-header">
                         <h3 class="station-title">4º Registro de Imóveis de Belo Horizonte</h3>
@@ -900,7 +991,7 @@
                     </div>
                 </div>
 
-                <div class="timeline-station">
+                <div class="timeline-station reveal">
                     <div class="station-dot"></div>
                     <div class="station-header">
                         <h3 class="station-title">Assprom — Tribunal de Justiça de Minas Gerais (TJMG)</h3>
@@ -928,62 +1019,125 @@
     
     <section id="projetos" class="section-wrapper">
         <div class="container">
-            <div class="section-header">
-                <div class="section-badge"><span class="num">03</span> // SOLUÇÕES & ESTUDOS PRÁTICOS</div>
-                <h2 class="section-title">Projetos e automações de rotina.</h2>
+            <div class="section-header reveal">
+                <div class="section-badge"><span class="num">03</span> // PORTFÓLIO DE SISTEMAS & AUTOMAÇÕES (4RIBH)</div>
+                <h2 class="section-title">Soluções desenvolvidas e implantadas em produção.</h2>
             </div>
 
             <div class="projects-grid">
                 
-                <div class="modern-card">
-                    <div class="project-top">
-                        <div>
-                            <span class="card-eyebrow">// AUTOMAÇÃO & ATENDIMENTO INTERNO</span>
-                            <h3 class="card-heading">Fluxo Digital de Chamados & Controle Operacional</h3>
+                
+                <div class="modern-card full-span reveal">
+                    <div>
+                        <div class="project-top">
+                            <div>
+                                <span class="card-eyebrow">// ECOSSISTEMA INTRANET · PYTHON (FLASK) + POSTGRESQL + ACTIVE DIRECTORY</span>
+                                <h3 class="card-heading">Portal Corporativo 4RIBH: Service Desk (TI), Estoque & Gestão de RH</h3>
+                            </div>
+                            <span class="pill-badge">EM PRODUÇÃO (UBUNTU SERVER)</span>
                         </div>
-                        <span class="pill-badge">PROJETO PRÁTICO</span>
-                    </div>
-                    <p class="card-description">
-                        Desenvolvimento de solução voltada para organizar o registro de solicitações internas, acompanhamento de demandas técnicas e padronização de rotinas de suporte. Construído com auxílio de Inteligência Artificial como par de programação para acelerar a estruturação lógica em Python e integração com banco de dados relacional.
-                    </p>
-                    <div class="flow-box">
-                        <span>Solicitação do Usuário</span>
-                        <span class="flow-arrow">→</span>
-                        <span>Triagem & Registro</span>
-                        <span class="flow-arrow">→</span>
-                        <span>Banco de Dados / Histórico</span>
+                        <p class="card-description">
+                            Plataforma unificada desenvolvida para centralizar as demandas internas da serventia, substituindo controles manuais por três módulos integrados sob autenticação única via Active Directory (LDAP) e distribuída automaticamente nas estações de trabalho via GPO do Windows Server.
+                        </p>
+                        <ul class="feature-bullets">
+                            <li><strong>Módulo Service Desk (Chamados TI):</strong> Abertura de chamados com modelos rápidos (Pessoal, Setor e Global), fluxo de status detalhado, cálculo de SLA em horas úteis, notificações em tempo real, alertas SMTP e canal de Ouvidoria/Sugestões.</li>
+                            <li><strong>Módulo de RH (Férias, Ausências e Saldos):</strong> Calendário visual agrupado por setores, controle de períodos aquisitivos, abono pecuniário, travas automáticas baseadas nas regras da CLT, perfis ocultos e exportação de relatórios estilizados em Excel (.xlsx) para a contabilidade.</li>
+                            <li><strong>Módulo de Controle de Estoque & Insumos:</strong> Gestão de catálogo, fornecedores, requisições por setor em menus sanfonados e alertas visuais de estoque mínimo.</li>
+                        </ul>
+                        <div class="flow-box">
+                            <span>Login AD (LDAP)</span>
+                            <span class="flow-arrow">→</span>
+                            <span>Hub de Sistemas (TI / RH / Estoque)</span>
+                            <span class="flow-arrow">→</span>
+                            <span>Pool PostgreSQL & Relatórios .XLSX</span>
+                        </div>
                     </div>
                     <div class="tag-row">
-                        <span class="tech-pill">Python</span>
-                        <span class="tech-pill">Desenvolvimento Assistido por IA</span>
-                        <span class="tech-pill">Banco de Dados</span>
-                        <span class="tech-pill">Padronização de Suporte</span>
+                        <span class="tech-pill">Python (Flask)</span>
+                        <span class="tech-pill">PostgreSQL (Connection Pool)</span>
+                        <span class="tech-pill">Integração LDAP / Active Directory</span>
+                        <span class="tech-pill">Deploy Ubuntu + GPO Windows</span>
+                        <span class="tech-pill">OpenPyXL</span>
                     </div>
                 </div>
 
-                <div class="modern-card">
-                    <div class="project-top">
-                        <div>
-                            <span class="card-eyebrow">// ANÁLISE DE DADOS & CONFORMIDADE</span>
-                            <h3 class="card-heading">Extração de Relatórios Gerenciais & Conciliação</h3>
+                
+                <div class="modern-card reveal delay-1">
+                    <div>
+                        <div class="project-top">
+                            <div>
+                                <span class="card-eyebrow">// ATENDIMENTO AO PÚBLICO · NODE.JS + SOCKET.IO</span>
+                                <h3 class="card-heading">SGA 4RIBH — Gestão de Filas, Totem & Painel de TV</h3>
+                            </div>
+                            <span class="pill-badge">TEMPO REAL</span>
                         </div>
-                        <span class="pill-badge">ROTINA CORPORATIVA</span>
-                    </div>
-                    <p class="card-description">
-                        Estruturação de consultas a bancos de dados internos e planilhas operacionais avançadas para emissão de indicadores gerenciais, apoio no fechamento de caixa e preparação de remessas de dados obrigatórios para órgãos reguladores e parceiros institucionais (TJMG, CNIB, PBH e SISCOAF).
-                    </p>
-                    <div class="flow-box">
-                        <span>Base de Dados Interna</span>
-                        <span class="flow-arrow">→</span>
-                        <span>Extração & Validação</span>
-                        <span class="flow-arrow">→</span>
-                        <span>Relatórios & Órgãos Reguladores</span>
+                        <p class="card-description">
+                            Sistema completo de gerenciamento de senhas construído para o salão de atendimento do cartório, conectando totens touchscreen, guichês de atendentes e monitores de TV em tempo real.
+                        </p>
+                        <ul class="feature-bullets">
+                            <li><strong>Studio Visual & Totem Kiosk:</strong> Editor com Live Preview no painel Admin, tela dividida para exibição de QR Code de Wi-Fi, modo de Acessibilidade (Alto Contraste/Zoom) e impressão térmica direta via USB (ESC/POS).</li>
+                            <li><strong>Painel de TV & BI:</strong> Chamada sonora com destaque visual por guichê, integração com placa de captura de TV e dashboard de indicadores (TMA, TME, desistências e rastreio completo da senha).</li>
+                        </ul>
                     </div>
                     <div class="tag-row">
-                        <span class="tech-pill">Consultas SQL</span>
-                        <span class="tech-pill">Excel Avançado</span>
-                        <span class="tech-pill">Conformidade TJMG / CNJ</span>
-                        <span class="tech-pill">Integridade da Informação</span>
+                        <span class="tech-pill">Node.js & Express</span>
+                        <span class="tech-pill">Socket.io (WebSockets)</span>
+                        <span class="tech-pill">PostgreSQL</span>
+                        <span class="tech-pill">Impressão ESC/POS USB</span>
+                        <span class="tech-pill">Dashboard BI</span>
+                    </div>
+                </div>
+
+                
+                <div class="modern-card reveal delay-2">
+                    <div>
+                        <div class="project-top">
+                            <div>
+                                <span class="card-eyebrow">// GOVERNANÇA DE TI & AUDITORIA · POWERSHELL + API</span>
+                                <h3 class="card-heading">Inventário Automatizado de Ativos & Prontuário Técnico</h3>
+                            </div>
+                            <span class="pill-badge">COMPLIANCE CNJ</span>
+                        </div>
+                        <p class="card-description">
+                            Solução criada para automatizar o levantamento de hardware e software das estações de trabalho da serventia, vinculando cada máquina ao seu histórico de manutenções e chamados.
+                        </p>
+                        <ul class="feature-bullets">
+                            <li><strong>Coleta Automática na Rede:</strong> Script PowerShell que sincroniza IP, MAC Address, Sistema Operacional, Processador e Memória RAM diretamente para o banco de dados.</li>
+                            <li><strong>Auditoria de Softwares:</strong> Verificação automatizada de conformidade (presença do antivírus corporativo Thor Heimdall, Microsoft Office, LibreOffice e navegadores) com exportação de laudo oficial datado.</li>
+                        </ul>
+                    </div>
+                    <div class="tag-row">
+                        <span class="tech-pill">PowerShell Scripting</span>
+                        <span class="tech-pill">API REST (Python)</span>
+                        <span class="tech-pill">Auditoria Provimento 213/CNJ</span>
+                        <span class="tech-pill">Gestão de Ativos</span>
+                    </div>
+                </div>
+
+                
+                <div class="modern-card full-span reveal">
+                    <div>
+                        <div class="project-top">
+                            <div>
+                                <span class="card-eyebrow">// PRODUTIVIDADE REGISTRAL · STREAMLIT & TKINTER DESKTOP</span>
+                                <h3 class="card-heading">Monitor de Envio de Protocolos & Calculadora de SLA em Dias Úteis</h3>
+                            </div>
+                            <span class="pill-badge">AUTOMAÇÃO DE DADOS</span>
+                        </div>
+                        <p class="card-description">
+                            Conjunto de ferramentas analíticas desenvolvidas para apoiar o controle de prazos legais e o envio de informações registrais a plataformas externas e órgãos reguladores.
+                        </p>
+                        <ul class="feature-bullets">
+                            <li><strong>Monitoramento e Reenvio de Protocolos (Web):</strong> Interface em Streamlit com busca rápida por número de protocolo, rotina automática de verificação de pendências, filtro por intervalo de datas e fila de tratamento de erros de envio.</li>
+                            <li><strong>Calculadora de Tempo de Registro (Desktop):</strong> Aplicação gráfica em Python (Tkinter / ttkbootstrap) conectada ao banco de dados para apurar o tempo exato de conclusão de documentos em horas úteis e convertê-lo automaticamente para dias úteis comerciais (jornada de 8h30).</li>
+                        </ul>
+                    </div>
+                    <div class="tag-row">
+                        <span class="tech-pill">Python</span>
+                        <span class="tech-pill">Streamlit</span>
+                        <span class="tech-pill">Tkinter / ttkbootstrap</span>
+                        <span class="tech-pill">SQL Avançado</span>
+                        <span class="tech-pill">Cálculo de SLA Registral</span>
                     </div>
                 </div>
 
@@ -994,33 +1148,33 @@
     
     <section id="pilares" class="section-wrapper">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <div class="section-badge"><span class="num">04</span> // MATRIZ DE COMPETÊNCIAS</div>
                 <h2 class="section-title">Pilares de sustentação técnica.</h2>
             </div>
 
             <div class="triad-grid">
-                <div class="domain-card">
+                <div class="domain-card reveal delay-1">
                     <div class="domain-icon">01</div>
                     <h3 class="domain-title">Infraestrutura & Redes</h3>
                     <p class="domain-desc">
-                        Manutenção preventiva e corretiva de estações, gerenciamento de servidores Windows, conectividade de rede, telefonia, impressoras e execução rigorosa de rotinas de backup.
+                        Manutenção preventiva e corretiva de estações, administração de Windows Server e Ubuntu, Active Directory, GPOs, conectividade de rede, telefonia e rotinas diárias de backup.
                     </p>
                 </div>
 
-                <div class="domain-card">
+                <div class="domain-card reveal delay-2">
                     <div class="domain-icon">02</div>
                     <h3 class="domain-title">Segurança & Governança</h3>
                     <p class="domain-desc">
-                        Gestão de contas corporativas, controle de permissões de acesso, administração de certificados digitais e adequação técnica ao Provimento 213/CNJ e à LGPD.
+                        Gestão de contas e acessos, administração de certificados digitais, auditoria de ativos de rede e adequação técnica ao Provimento 213/CNJ, normas ISO e LGPD.
                     </p>
                 </div>
 
-                <div class="domain-card">
+                <div class="domain-card reveal delay-3">
                     <div class="domain-icon">03</div>
-                    <h3 class="domain-title">Dados & Sistemas</h3>
+                    <h3 class="domain-title">Dados & Sistemas Internos</h3>
                     <p class="domain-desc">
-                        Emissão de relatórios estratégicos via banco de dados internos, administração de sistemas registrais e aplicação de lógica de programação na solução de problemas.
+                        Extração de relatórios estratégicos via SQL, administração de bancos PostgreSQL/SQLite e desenvolvimento de ferramentas web/desktop assistido por IA para automação de processos.
                     </p>
                 </div>
             </div>
@@ -1030,12 +1184,12 @@
     
     <section id="credenciais" class="section-wrapper">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <div class="section-badge"><span class="num">05</span> // ACADEMIA & CERTIFICAÇÕES</div>
                 <h2 class="section-title">Formação acadêmica e credenciais.</h2>
             </div>
 
-            <div class="modern-card">
+            <div class="modern-card reveal">
                 <span class="card-eyebrow">// GRADUAÇÃO TECNOLÓGICA EM ANDAMENTO (FEV 2025 — JUL 2027)</span>
                 <h3 class="card-heading">CST em Análise e Desenvolvimento de Sistemas</h3>
                 <p class="card-description" style="margin-top: 10px; margin-bottom: 0;">
@@ -1043,7 +1197,7 @@
                 </p>
             </div>
 
-            <div class="creds-container">
+            <div class="creds-container reveal delay-1">
                 <div class="cred-item">
                     <div class="cred-title">Do Zero ao 213 — Provimento 213/CNJ (Segurança e Governança)</div>
                     <div class="cred-issuer">TXAI Grupo Txai</div>
@@ -1091,16 +1245,16 @@
     
     <section id="contato" class="section-wrapper" style="border-bottom: none;">
         <div class="container">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <div class="section-badge"><span class="num">06</span> // CANAL DIRETO</div>
                 <h2 class="section-title">Vamos conversar sobre o próximo passo.</h2>
             </div>
 
-            <div class="contact-card">
+            <div class="contact-card reveal delay-1">
                 <div>
                     <h3 class="card-heading" style="margin-bottom: 12px;">Disponível para oportunidades em Suporte Técnico e Infraestrutura de TI.</h3>
                     <p style="color: var(--text-secondary); font-size: 14.5px;">
-                        Entre em contato por e-mail ou WhatsApp para conversarmos sobre como minha experiência técnica e vivência no ambiente jurídico podem somar à sua equipe.
+                        Entre em contato por e-mail ou WhatsApp para conversarmos sobre como minha experiência prática em infraestrutura, suporte e desenvolvimento de soluções internas pode somar à sua equipe.
                     </p>
                 </div>
 
@@ -1117,16 +1271,76 @@
                             <span>↗</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#">
-                            <span>Voltar ao topo</span>
-                            <span>↑</span>
-                        </a>
-                    </li>
                 </ul>
             </div>
         </div>
     </section>
+
+    
+    <script>
+        // 1. Botão flutuante "Voltar ao topo" aparece logo no primeiro scroll para baixo
+        const floatingBtn = document.getElementById('floatingTopBtn');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 180) {
+                floatingBtn.classList.add('show');
+            } else {
+                floatingBtn.classList.remove('show');
+            }
+        });
+
+        // 2. Animação dinâmica conforme dá scroll down (IntersectionObserver)
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealElements.forEach(function(el) {
+            revealObserver.observe(el);
+        });
+
+        // 3. Contadores numéricos que sobem suavemente em ~2.5 segundos ao entrar na tela
+        const counters = document.querySelectorAll('.count-up');
+        const duration = 2400; // 2.4 segundos
+
+        const counterObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-target'), 10);
+                    const prefix = el.getAttribute('data-prefix') || '';
+                    const suffix = el.getAttribute('data-suffix') || '';
+                    let startTime = null;
+
+                    function animateCount(currentTime) {
+                        if (!startTime) startTime = currentTime;
+                        const progress = Math.min((currentTime - startTime) / duration, 1);
+                        // Curva easeOutCubic para desacelerar suavemente no fim
+                        const easeProgress = 1 - Math.pow(1 - progress, 3);
+                        const currentVal = Math.floor(easeProgress * target);
+
+                        el.textContent = prefix + currentVal + suffix;
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animateCount);
+                        } else {
+                            el.textContent = prefix + target + suffix;
+                        }
+                    }
+
+                    requestAnimationFrame(animateCount);
+                    observer.unobserve(el);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counters.forEach(function(counter) {
+            counterObserver.observe(counter);
+        });
+    </script>
 
 </body>
 </html>
